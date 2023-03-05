@@ -16,7 +16,7 @@ public class SearchMusicController {
     @RequestMapping("/searchMusic")
     public @ResponseBody List<Music> searchMusic(String key) throws IOException {
         //定义出歌曲搜索的url地址
-        String searchUrl = "http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key="+key+"&pn=1&rn=20&httpsStatus=1&reqId=10f57730-b7fb-11ed-9a2c-b9c8fb814943";
+        String searchUrl = "http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key="+key+"&pn=1&rn=30&httpsStatus=1&reqId=10f57730-b7fb-11ed-9a2c-b9c8fb814943";
 
         //去访问酷我的官网
         Connection.Response execute = Jsoup.connect("http://www.kuwo.cn").execute();
