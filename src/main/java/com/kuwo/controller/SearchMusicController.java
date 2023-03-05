@@ -39,7 +39,7 @@ public class SearchMusicController {
         String list = JSONObject.parseObject(data).getString("list");
         //将list转换为List集合完成数据的封装
         List<Music> musics = JSONArray.parseArray(list, Music.class);
-        System.out.println(musics);
+
         //将集合数据返回给前端
         return musics;
     }
