@@ -14,13 +14,14 @@ import java.util.List;
 
 public class SearchMusicController {
     @RequestMapping("/searchMusic")
-    public @ResponseBody List<Music> searchMusic(String key) throws IOException {
+    public @ResponseBody
+    List<Music> searchMusic(String key) throws IOException {
         //定义出歌曲搜索的url地址
-        String searchUrl = "http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key="+key+"&pn=1&rn=30&httpsStatus=1&reqId=10f57730-b7fb-11ed-9a2c-b9c8fb814943";
+        String searchUrl = "http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key=" + key + "&pn=1&rn=20&httpsStatus=1&reqId=ea697cc1-bb46-11ed-bcfb-f774561b7a6a";
+
 
         //去访问酷我的官网
         Connection.Response execute = Jsoup.connect("http://www.kuwo.cn").execute();
-
         //去拿到kw_token令牌
         String kw_token = execute.cookie("kw_token");
 
@@ -38,6 +39,7 @@ public class SearchMusicController {
         String list = JSONObject.parseObject(data).getString("list");
         //将list转换为List集合完成数据的封装
         List<Music> musics = JSONArray.parseArray(list, Music.class);
+        System.out.println(musics);
         //将集合数据返回给前端
         return musics;
     }
