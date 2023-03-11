@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MV页面</title>
+</head>
+<style>
+    .mv{
+        background: #333333;
+        height: 800px;
+        width: 100%;
+        /*溢出隐藏*/
+        overflow: hidden;
+    }
+    .mv_play{
+        height: 700px;
+        width: 1400px;
+        margin: 50px auto;
+    }
+    .mv_play video{
+        height: 700px;
+        /*background: #e84c13;*/
+        width: 1400px;
+        margin: auto;
+    }
+
+    .mv_comment{
+        height: 600px;
+        width: 100%;
+    }
+    .mv_comment span{
+        margin-left: 300px;
+        font-size: 35px;
+        line-height: 40px;
+        color: #6a6149;
+    }
+
+    .mv_comment{
+        width: 100%;
+        margin-top: 15px;
+    }
+    .mvhotcomment span{
+        font-size: 12px;
+        line-height: 20px;
+        color: #6a6149;
+    }
+    .mvnewcomment span{
+        font-size: 12px;
+        line-height: 20px;
+        color: #6a6149;
+    }
+
+    .left img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    /*.right{*/
+    /*    width: 80%;*/
+    /*    margin-left: 15px;*/
+    /*}*/
+
+    .nickName span{
+        font-size: 14px;
+        line-height: 22px;
+        margin-left: 10px;
+        font-weight: 600;
+    }
+    .content span{
+        font-size: 14px;
+        line-height: 26px;
+        margin-left: 10px;
+    }
+    .time span{
+        font-size: 14px;
+        line-height: 14px;
+        opacity: 0.5;
+        margin-left: 10px;
+    }
+</style>
+
+<script src="js/jquery-1.7.2.js"></script>
+
+
+<script>
+
+    window.onload = function (){
+        //页面一加载我们就需要获取到MV的播放地址
+        //http://localhost:8080/comment?rid=228908
+        var rid = location.href.split("=")[1];
+        //根据歌曲的rid来获取MV的信息
+        $.post("/getMvUrl",{"rid":rid},function (result){
+            //回调函数result的结果其实就是MV的播放地址
+            $("#bfq").attr("src",result)
+        })
+        $.post("/getMVhotComment",{"rid":rid},function (result){
+            // result就是热门评论
+            for(var i =0;i<result.length;i++){
+                var mvhotComment = "<div class=\"upic\">\n" +
+                    "                    <img src=\""+result[i].u_pic+"\">\n" +
+                    "                </div>\n" +
+                    "                <div class=\"nickName\">\n" +
+                    "                    <span>"+result[i].u_name+"</span>\n" +
+                    "                </div>\n" +
+                    "                <div class=\"hot_comment\">\n" +
+                    "                    <span>"+result[i].msg+"</span>\n" +
+                    "                </div>\n" +
+                    "                <div class=\"time\">\n" +
+                    "                    <span>"+result[i].time+"</span>\n" +
+                    "                </div>";
+                //将热门评论追加到hotComment中
+                $(".mvhotcomment").append(mvhotComment);
+            }
+        })
+        $.post("/getMVComment",{"rid":rid},function (result){
+            // result就是最新
+            for(var i =0;i<result.length;i++){
+                var mvComment = "<div class=\"upic\">\n" +
+                    "                    <img src=\""+result[i].u_pic+"\">\n" +
+                    "                </div>\n" +
+                    "                <div class=\"nickName\">\n" +
+                    "                    <span>"+result[i].u_name+"</span>\n" +
+                    "                </div>\n" +
+                    "                <div class=\"hot_comment\">\n" +
+                    "                    <span>"+result[i].msg+"</span>\n" +
+                    "                </div>\n" +
+                    "                <div class=\"time\">\n" +
+                    "                    <span>"+result[i].time+"</span>\n" +
+                    "                </div>";
+                //将热门评论追加到hotComment中
+                $(".mvnewcomment").append(mvComment);
+            }
+        })
+    }
+
+</script>
+
+<body>
+
+
+    <!--MV播放区域-->
+    <div class="mv">
+        <!--MV-->
+        <div class="mv_play">
+            <video id="bfq" src="" autoplay controls muted></video>
+        </div>
+    </div>
+    <!--评论区域-->
+    <div class="mv_comment">
+        <span>热门评论</span>
+        <div class="mvhotcomment">
+
+        </div>
+        <span>最新评论</span>
+        <div class="mvnewcomment">
+            
+        </div>
+    </div>
+
+
+</body>
+</html>
