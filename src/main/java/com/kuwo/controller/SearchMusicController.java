@@ -6,25 +6,25 @@ import com.kuwo.entity.Music;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.List;
-
+@Controller
 public class SearchMusicController {
     @RequestMapping("/searchMusic")
     public @ResponseBody
     List<Music> searchMusic(String key) throws IOException {
         //定义出歌曲搜索的url地址
-        String searchUrl = "http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key=" + key + "&pn=1&rn=20&httpsStatus=1&reqId=ea697cc1-bb46-11ed-bcfb-f774561b7a6a";
+        String searchUrl = "http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key="+key+"&pn=1&rn=30&httpsStatus=1&reqId=1d74ffa0-bf4c-11ed-b668-05e553dfe2e0";
 
-
+        System.out.println(key);
         //去访问酷我的官网
         Connection.Response execute = Jsoup.connect("http://www.kuwo.cn").execute();
         //去拿到kw_token令牌
         String kw_token = execute.cookie("kw_token");
-
         //我们就可以去访问searchUrl地址了
         Document document = Jsoup.connect(searchUrl)
                 .cookie("kw_token", kw_token)
