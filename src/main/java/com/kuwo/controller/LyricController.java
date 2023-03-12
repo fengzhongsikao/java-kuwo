@@ -5,11 +5,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.kuwo.entity.Lyric;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+@Controller
 public class LyricController {
 
     //根据歌曲的rid来获取对应的歌词信息

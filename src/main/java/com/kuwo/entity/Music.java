@@ -7,19 +7,21 @@ public class Music {
     private String releaseDate;//歌曲发布时间
     private String album;//专辑名称
     private String songTimeMinutes;//播放时长
-    private String name ;//歌曲名称
+    private String songName ;//歌曲名称2
+    private String name ;//歌曲名称1
     private Integer hasmv; //是否有Mv
 
     public Music() {
     }
 
-    public Music(String artist, String pic, String rid, String releaseDate, String album, String songTimeMinutes, String name, Integer hasmv) {
+    public Music(String artist, String pic, String rid, String releaseDate, String album, String songTimeMinutes, String songName, String name, Integer hasmv) {
         this.artist = artist;
         this.pic = pic;
         this.rid = rid;
         this.releaseDate = releaseDate;
         this.album = album;
         this.songTimeMinutes = songTimeMinutes;
+        this.songName = songName;
         this.name = name;
         this.hasmv = hasmv;
     }
@@ -70,6 +72,14 @@ public class Music {
 
     public void setSongTimeMinutes(String songTimeMinutes) {
         this.songTimeMinutes = songTimeMinutes;
+    }
+
+    public String getSongName() {
+        return songName;
+    }
+
+    public void setSongName(String songName) {
+        this.songName = songName;
     }
 
     public String getName() {

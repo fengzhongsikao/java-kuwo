@@ -2,9 +2,11 @@ package com.kuwo.controller;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
 public class PlayMusicController {
     //根据歌曲的rid来帮我们获取到音乐的播放地址
     @RequestMapping("/playMusic")

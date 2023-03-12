@@ -30,7 +30,7 @@ public class DownMusicController {
         URL url = new URL(mp3Url);
         InputStream is = url.openStream();
         //创建输出流对象
-        FileOutputStream fos = new FileOutputStream(new File("D:\\Kugou\\"+artist+" - "+name+".mp3"));
+        FileOutputStream fos = new FileOutputStream(new File("C:\\Kugou\\"+artist+" - "+name+".mp3"));
         //开始来进行读写操作
         byte[] bys = new byte[1024];
         int len;
